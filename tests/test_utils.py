@@ -2,6 +2,7 @@ from src.category import Category
 from src.utils import load_data_from_json
 from unittest.mock import mock_open, patch
 
+
 def test_load_data_from_json(sample_json_data):
     with patch("builtins.open", mock_open(read_data=sample_json_data)):
         categories = load_data_from_json("mock.json")
