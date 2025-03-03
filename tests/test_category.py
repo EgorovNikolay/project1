@@ -36,3 +36,28 @@ def test_category_count(sample_category):
 
 def test_product_count(sample_category):
     assert Category.product_count == 1
+
+
+def test_category_str():
+    product1 = Product("Laptop", "High-end gaming laptop", 1500.00, 10)
+    product2 = Product("Mouse", "Wireless mouse", 50.00, 20)
+    category = Category("Electronics", "Gadgets and devices", [product1, product2])
+    expected_output = "Electronics, количество продуктов: 30 шт."
+    assert str(category) == expected_output
+
+
+def test_category_products():
+    product1 = Product("Laptop", "High-end gaming laptop", 1500.00, 10)
+    product2 = Product("Mouse", "Wireless mouse", 50.00, 20)
+    category = Category("Electronics", "Gadgets and devices", [product1, product2])
+    expected_output = "Laptop, 1500.0 руб. Остаток: 10 шт.\nMouse, 50.0 руб. Остаток: 20 шт."
+    assert category.products == expected_output
+
+
+def test_add_product_to_category():
+    product1 = Product("Laptop", "High-end gaming laptop", 1500.00, 10)
+    category = Category("Electronics", "Gadgets and devices", [product1])
+    product2 = Product("Mouse", "Wireless mouse", 50.00, 20)
+    category.add_product(product2)
+    assert len(category._Category__products) == 2
+    assert str(category) == "Electronics, количество продуктов: 30 шт."
