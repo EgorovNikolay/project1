@@ -1,9 +1,10 @@
-class Product:
+from src.base_product import BaseProduct
+from src.log_mixin import LogMixin
+
+class Product(BaseProduct, LogMixin):
     def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
+        super().__init__( name, description, quantity)
         self.__price = price
-        self.quantity = quantity
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
