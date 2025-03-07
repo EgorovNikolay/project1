@@ -1,4 +1,6 @@
 from src.product import Product
+from src.category import Category
+from src.smartphone import Smartphone
 import pytest
 
 
@@ -55,7 +57,16 @@ def test_product_addition():
     expected_value = (1500.00 * 10) + (50.00 * 20)
     assert total_value == expected_value
 
-def test_product_addition_invalid_type():
-    product = Product("Laptop", "High-end gaming laptop", 1500.00, 10)
-    with pytest.raises(TypeError, match="Можно складывать только объекты класса Product."):
-        product + "invalid_object"
+def test_add_product_valid():
+    smartphone = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
+                            "S23 Ultra", 256, "Серый")
+    category = Category("Смартфоны", "Высокотехнологичные смартфоны", [])
+    category.add_product(smartphone)
+    assert len(category._Category__products) == 1
+
+
+def test_add_product_invalid():
+    category = Category("Смартфоны", "Высокотехнологичные смартфоны", [])
+    with pytest.raises(TypeError, match="Можно добавлять только объекты класса Product или его наследников."):
+        category.add_product("Not a product")
+

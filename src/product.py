@@ -9,6 +9,8 @@ class Product:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
+        if type(self) is not type(other):
+            raise TypeError("Нельзя складывать объекты разных типов (например, смартфон и траву).")
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только объекты класса Product.")
         return (self.price * self.quantity) + (other.price * other.quantity)
