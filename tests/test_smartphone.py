@@ -1,7 +1,7 @@
 import pytest
 from src.smartphone import Smartphone
 from src.lawn_grass import LawnGrass
-
+from src.product import Product
 
 def test_add_same_type_smartphone():
     smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
@@ -28,3 +28,34 @@ def test_add_non_product_smartphone():
 
     with pytest.raises(TypeError):
         result = smartphone + "Not a product"
+
+def test_smartphone_initialization():
+    smartphone = Smartphone(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый"
+    )
+    assert smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert smartphone.efficiency == 95.5
+    assert smartphone.model == "S23 Ultra"
+    assert smartphone.memory == 256
+    assert smartphone.color == "Серый"
+
+
+def test_smartphone_inheritance():
+    smartphone = Smartphone(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый"
+    )
+    assert isinstance(smartphone, Product)
