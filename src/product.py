@@ -3,6 +3,8 @@ from src.log_mixin import LogMixin
 
 class Product(BaseProduct, LogMixin):
     def __init__(self, name, description, price, quantity):
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         super().__init__( name, description, quantity)
         self.__price = price
 
