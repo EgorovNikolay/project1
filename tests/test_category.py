@@ -61,3 +61,18 @@ def test_add_product_to_category():
     category.add_product(product2)
     assert len(category._Category__products) == 2
     assert str(category) == "Electronics, количество продуктов: 30 шт."
+
+
+def test_category_middle_price():
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+    category = Category("Смартфоны", "Категория смартфонов", [product1, product2, product3])
+
+    expected_average = (180000.0 + 210000.0 + 31000.0) / 3
+    assert category.middle_price() == pytest.approx(expected_average, rel=1e-3)
+
+def test_category_middle_price_empty():
+    category = Category("Пустая категория", "Категория без продуктов", [])
+    assert category.middle_price() == 0

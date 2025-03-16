@@ -70,3 +70,12 @@ def test_add_product_invalid():
     with pytest.raises(TypeError, match="Можно добавлять только объекты класса Product или его наследников."):
         category.add_product("Not a product")
 
+def test_product_zero_quantity():
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+
+
+def test_product_valid_quantity():
+    product = Product("Laptop", "High-end gaming laptop", 1500.00, 10)
+    assert product.name == "Laptop"
+    assert product.quantity == 10

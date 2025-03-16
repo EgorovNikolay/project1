@@ -1,9 +1,12 @@
 from src.base_product import BaseProduct
 from src.log_mixin import LogMixin
 
+
 class Product(BaseProduct, LogMixin):
     def __init__(self, name, description, price, quantity):
-        super().__init__( name, description, quantity)
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        super().__init__(name, description, quantity)
         self.__price = price
 
     def __str__(self):
